@@ -1,6 +1,7 @@
 imx-lib (10.11.01) maverick; urgency=low
 
   * Update to latest BSP
+  * Fixed license to not use GPL-3 (argh)
 
  -- Matt Sealey <matt@genesi-usa.com>  Fri, 17 Dec 2010 10:41:13 -0600
 
