@@ -22,7 +22,7 @@ all install:
 endif
 
 $(LIBNAME).so: $(OBJS)
-	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^ -lpthread
+	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^
 
 %.o: %.c
 ifeq "$(PLATFORM)" ""
