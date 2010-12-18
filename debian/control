@@ -1,0 +1,21 @@
+Source: imx-lib
+Section: unknown
+Priority: extra
+Maintainer: Steev Klimaszewski <steev@genesi-usa.com>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.9.1
+
+Package: imx-lib
+Architecture: armel
+Depends: firmware-imx,
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides: imx-lib
+Description: Libraries for ipu, vpu and sahara2
+ Libraries for the ipu, vpu and sahara2 units on the iMX5
+
+Package: imx-lib-dev
+Architecture: armel
+Depends: imx-lib
+Description: Headers for ipu, vpu and sahara2
+ Headers for the ipu, vpu, and sahara2 units on the iMX5

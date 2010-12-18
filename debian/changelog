@@ -1,0 +1,11 @@
+imx-lib (10.11.01) maverick; urgency=low
+
+  * Update to latest BSP
+
+ -- Matt Sealey <matt@genesi-usa.com>  Fri, 17 Dec 2010 10:41:13 -0600
+
+imx-lib (10.10.00) maverick; urgency=low
+
+  * Initial release
+
+ -- Steev Klimaszewski <steev@genesi-usa.com>  Sat, 13 Nov 2010 02:52:54 -0600
