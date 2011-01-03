@@ -6,14 +6,15 @@ OBJS = mxc_ipu_hl_lib.o mxc_ipu_lib.o
 # list of platforms which want this test case
 INCLUDE_LIST:= IMX37_3STACK IMX51 IMX53
 
-LIBNAME=libipu
+LIBNAME=libipu.so
+LIBSONAME=$(LIBNAME).$(LIB_VERSION_MAJOR).$(LIB_VERSION_MINOR)
 
 ifeq ($(PLATFORM), $(findstring $(PLATFORM), $(INCLUDE_LIST)))
-all: $(LIBNAME).so
+all: $(LIBSONAME)
 
 install:
 	@mkdir -p $(DESTDIR)/usr/lib
-	cp $(LIBNAME).* $(DESTDIR)/usr/lib
+	cp $(LIBNAME)* $(DESTDIR)/usr/lib
 	@mkdir -p $(DESTDIR)/usr/include
 	cp mxc_ipu_hl_lib.h $(DESTDIR)/usr/include
 else
@@ -21,8 +22,10 @@ all install:
 	@echo "Not support platform, will not complile"
 endif
 
-$(LIBNAME).so: $(OBJS)
+$(LIBSONAME): $(OBJS)
 	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^
+	ln -s $(LIBSONAME) $(LIBNAME).$(LIB_VERSION_MAJOR)
+	ln -s $(LIBSONAME) $(LIBNAME)
 
 %.o: %.c
 ifeq "$(PLATFORM)" ""
@@ -32,4 +35,4 @@ endif
 
 .PHONY: clean
 clean:
-	@rm -f $(OBJS) $(LIBNAME).*
+	@rm -f $(OBJS) $(LIBNAME)*

@@ -17,6 +17,9 @@
 export DH_OPTIONS
 # Let's see if this works...
 export PLATFORM=IMX51
+export INCLUDE=-I/usr/src/linux-headers-2.6.31.14.14-efikamx/include/
+export LIB_VERSION_MAJOR=1
+export LIB_VERSION_MINOR=0
 
 %:
 	dh $@ 

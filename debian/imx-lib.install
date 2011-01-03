@@ -1,4 +1,4 @@
-ipu/libipu.so	/usr/lib
-vpu/libvpu.so	/usr/lib
-sahara2/libsahara.so	/usr/lib
-screenlayer/libIpuScreenLayer.so	/usr/lib
+ipu/libipu.so.1.0			/usr/lib
+vpu/libvpu.so.1.0			/usr/lib
+#sahara2/libsahara.so			/usr/lib
+screenlayer/libIpuScreenLayer.so.1.0	/usr/lib
