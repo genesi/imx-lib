@@ -648,6 +648,7 @@ static int _ipu_split_mode_set_stripe(ipu_lib_priv_handle_t * ipu_priv_handle, d
 
 static task_mode_t __ipu_task_check(ipu_lib_priv_handle_t * ipu_priv_handle,
 		ipu_lib_input_param_t * input,
+		ipu_lib_output_param_t * output,
 		ipu_lib_overlay_param_t * overlay)
 {
 	task_mode_t task_mode = NULL_MODE;
