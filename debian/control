@@ -8,7 +8,7 @@ Standards-Version: 3.9.1
 
 Package: imx-lib
 Architecture: armel
-Depends: firmware-imx,${shlibs:Depends},${misc:Depends}
+Depends: imx-firmware,${shlibs:Depends},${misc:Depends}
 Provides: imx-lib
 Description: Libraries for ipu, vpu and sahara2
  Libraries for the ipu, vpu and sahara2 units on the iMX5
