@@ -13,6 +13,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)
 LOCAL_MODULE := libvpu
 LOCAL_LD_FLAGS += -nostartfiles
 LOCAL_PRELINK_MODULE := false
+LOCAL_MODULE_TAGS := eng
 include $(BUILD_SHARED_LIBRARY)
 
 endif

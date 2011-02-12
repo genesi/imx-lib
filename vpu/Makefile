@@ -32,7 +32,7 @@ all: $(LIB_SONAME_FULL) $(LIBNAME).a
 
 install: install_headers
 	@mkdir -p $(DESTDIR)/usr/lib
-	cp $(LIBNAME)* $(DESTDIR)/usr/lib
+	cp $(LIBNAME).* $(DESTDIR)/usr/lib
 
 install_headers:
 	@mkdir -p $(DESTDIR)/usr/include
@@ -55,4 +55,4 @@ $(LIBNAME).a: $(OBJ)
 
 .PHONY: clean
 clean:
-	rm -f $(LIBNAME)* $(OBJ)
+	rm -f $(LIBNAME).* $(OBJ)

@@ -511,7 +511,7 @@ typedef struct vpu_versioninfo {
  * v4.1.2 [2008.08.22] update MX37 VPU firmware to V1.0.5
  * v4.0.2 [2008.08.21] add the IOClkGateSet() for power saving.
  */
-#define VPU_LIB_VERSION_CODE	VPU_LIB_VERSION(5, 1, 3)
+#define VPU_LIB_VERSION_CODE	VPU_LIB_VERSION(5, 1, 4)
 
 extern unsigned int system_rev;
 

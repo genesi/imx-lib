@@ -63,7 +63,7 @@ fi
 cd $IMX_LIB_DIR
 
 # install libraries and headers
-make DEST_DIR=$RPM_BUILD_ROOT/%{pfx} install
+make DESTDIR=$RPM_BUILD_ROOT/%{pfx} install
 
 %Clean
 rm -rf $RPM_BUILD_ROOT

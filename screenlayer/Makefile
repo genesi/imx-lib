@@ -15,7 +15,7 @@ all: $(LIBSONAME)
 
 install:
 	@mkdir -p $(DESTDIR)/usr/lib
-	cp $(LIBNAME)* $(DESTDIR)/usr/lib
+	cp $(LIBNAME).* $(DESTDIR)/usr/lib
 	@mkdir -p $(DESTDIR)/usr/include
 	cp ScreenLayer.h $(DESTDIR)/usr/include
 else
@@ -33,4 +33,4 @@ $(LIBSONAME): $(OBJS)
 
 .PHONY: clean
 clean:
-	@rm -f $(OBJS) $(LIBNAME)*
+	@rm -f $(OBJS) $(LIBNAME).*

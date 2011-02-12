@@ -14,7 +14,7 @@ all: $(LIBSONAME)
 
 install:
 	@mkdir -p $(DESTDIR)/usr/lib
-	cp $(LIBNAME)* $(DESTDIR)/usr/lib
+	cp $(LIBNAME).* $(DESTDIR)/usr/lib
 	@mkdir -p $(DESTDIR)/usr/include
 	cp mxc_ipu_hl_lib.h $(DESTDIR)/usr/include
 else
@@ -23,7 +23,7 @@ all install:
 endif
 
 $(LIBSONAME): $(OBJS)
-	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^
+	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^ -lpthreads
 	ln -s $(LIBSONAME) $(LIBNAME).$(LIB_VERSION_MAJOR)
 	ln -s $(LIBSONAME) $(LIBNAME)
 
@@ -35,4 +35,4 @@ endif
 
 .PHONY: clean
 clean:
-	@rm -f $(OBJS) $(LIBNAME)*
+	@rm -f $(OBJS) $(LIBNAME).*

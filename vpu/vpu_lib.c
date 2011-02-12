@@ -551,6 +551,11 @@ RetCode vpu_EncClose(EncHandle handle)
 	IOFreeVirtMem(&pEncInfo->picParaBaseMem);
 	IOFreePhyMem(&pEncInfo->picParaBaseMem);
 
+	/* Free searchRam if searchRam doesn't use IRAM */
+	if ((pEncInfo->secAxiUse.useHostMeEnable == 0) &&
+	    (pEncInfo->secAxiUse.searchRamAddr))
+		IOFreePhyMem(&pEncInfo->searchRamMem);
+
 	FreeCodecInstance(pCodecInst);
 	UnlockVpu(vpu_semap);
 
@@ -747,6 +752,12 @@ RetCode vpu_EncGetInitialInfo(EncHandle handle, EncInitialInfo * info)
 	/* Set secondAXI IRAM */
 	iramParam.width = pEncOP->picWidth;
 	SetEncSecondAXIIRAM(&pEncInfo->secAxiUse, &iramParam);
+	/* Use external memory if IRAM is disabled for searchMe*/
+	if (pEncInfo->secAxiUse.useHostMeEnable == 0) {
+		pEncInfo->searchRamMem.size = pEncInfo->secAxiUse.searchRamSize;
+		IOGetPhyMem(&pEncInfo->searchRamMem);
+		pEncInfo->secAxiUse.searchRamAddr = pEncInfo->searchRamMem.phy_addr;
+	}
 
 	VpuWriteReg(CMD_ENC_SEARCH_BASE, pEncInfo->secAxiUse.searchRamAddr);
 	VpuWriteReg(CMD_ENC_SEARCH_SIZE, pEncInfo->secAxiUse.searchRamSize);
