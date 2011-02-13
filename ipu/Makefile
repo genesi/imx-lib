@@ -23,7 +23,7 @@ all install:
 endif
 
 $(LIBSONAME): $(OBJS)
-	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^ -lpthreads
+	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^ -lpthread
 	ln -s $(LIBSONAME) $(LIBNAME).$(LIB_VERSION_MAJOR)
 	ln -s $(LIBSONAME) $(LIBNAME)
 
