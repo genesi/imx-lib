@@ -1,17 +1,17 @@
-imx-lib (11.01.01) maverick; urgency=low
+imx-lib (1.11.01.01) maverick; urgency=low
 
   * Update to latest BSP
 
  -- Matt Sealey <matt@genesi-usa.com>  Sat, 12 Feb 2011 20:15:44 -0600
 
-imx-lib (10.11.01) maverick; urgency=low
+imx-lib (1.10.11.01) maverick; urgency=low
 
   * Update to latest BSP
   * Fixed license to not use GPL-3 (argh)
 
  -- Matt Sealey <matt@genesi-usa.com>  Fri, 17 Dec 2010 10:41:13 -0600
 
-imx-lib (10.10.00) maverick; urgency=low
+imx-lib (1.10.10.00) maverick; urgency=low
 
   * Initial release
 
