@@ -1,3 +1,9 @@
+imx-lib (1.1.1-20110406) maverick; urgency=low
+
+  * Update to latest BSP
+
+ -- Matt Sealey <matt@genesi-usa.com>  Sat, 12 Feb 2011 20:15:44 -0600
+
 imx-lib (1.1.0-20110212) maverick; urgency=low
 
   * Update to latest BSP
