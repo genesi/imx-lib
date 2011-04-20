@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2010 Freescale Semiconductor, Inc. All Rights Reserved.
+ * Copyright 2004-2011 Freescale Semiconductor, Inc. All Rights Reserved.
  *
  */
 
@@ -133,6 +133,7 @@ enum {
 	IPU_CTL_FREE_MEM,
 	IPU_CTL_TASK_QUERY,
 	IPU_CTL_TASK_KILL,
+	IPU_CTL_UPDATE_DP_CSC,
 };
 
 /*
@@ -159,6 +160,38 @@ typedef struct {
 	int task_pid;
 	int task_mode;
 } ipu_lib_ctl_task_t;
+
+/*
+ * example:
+ * ipu_lib_ctl_csc_t csc;
+ * csc.param = csc_array;
+ * mxc_ipu_lib_task_control(IPU_CTL_UPDATE_DP_CSC, (void *)(&csc), NULL);
+ * param = {
+ * 	CSC_A0, CSC_A1, CSC_A2,
+ * 	CSC_A3, CSC_A4, CSC_A5,
+ * 	CSC_A6, CSC_A7, CSC_A8,
+ *	CSC_B0, CSC_B1, CSC_B2,
+ *	CSC_S0, CSC_S1, CSC_S2,
+ * }
+ *
+ * A = {
+ * 	CSC_A0, CSC_A1, CSC_A2,
+ * 	CSC_A3, CSC_A4, CSC_A5,
+ * 	CSC_A6, CSC_A7, CSC_A8,
+ * }
+ * B = {
+ *	CSC_B0, CSC_B1, CSC_B2,
+ * }
+ * E = {
+ *	CSC_S0, CSC_S1, CSC_S2,
+ * }
+ * S = Ax + B
+ * S[i] = (sum(A[i][j]*In[j]) >> 4) + (B[i] << 2) + (1 << (3-E[i]))
+ * Out[i] = Clip(S[i] >> 4-E[i])
+ */
+typedef struct {
+	int param[5][3];
+} ipu_lib_ctl_csc_t;
 
 /*
  * input parameter settings.

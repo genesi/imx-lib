@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2010 Freescale Semiconductor, Inc. All Rights Reserved.
+ * Copyright 2004-2011 Freescale Semiconductor, Inc. All Rights Reserved.
  *
  */
 
@@ -173,6 +173,7 @@ uint32_t bytes_per_pixel(uint32_t fmt)
 		case IPU_PIX_FMT_GENERIC:       /*generic data */
 		case IPU_PIX_FMT_RGB332:
 		case IPU_PIX_FMT_YUV420P:
+		case IPU_PIX_FMT_YVU420P:
 		case IPU_PIX_FMT_YUV420P2:
 		case IPU_PIX_FMT_YUV422P:
 		case IPU_PIX_FMT_YVU422P:
@@ -303,4 +304,13 @@ int ipu_update_channel_offset(ipu_channel_t channel, ipu_buffer_t type,
 
 	ret = ioctl(fd_ipu, IPU_UPDATE_BUF_OFFSET, &offset_parm);
 	return ret;
+}
+
+int ipu_update_dp_csc(int **param)
+{
+	ipu_csc_update csc;
+	csc.channel = MEM_FG_SYNC;
+	csc.param = param;
+
+	return ioctl(fd_ipu, IPU_CSC_UPDATE, &csc);
 }

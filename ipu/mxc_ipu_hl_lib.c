@@ -52,6 +52,7 @@ extern "C"{
 static int debug_level = DBG_ERR;
 
 #ifdef BUILD_FOR_ANDROID
+#define LOG_TAG	"ipulib"
 #include <utils/Log.h>
 #include <cutils/properties.h>
 #define FBDEV0	"/dev/graphics/fb0"
@@ -237,6 +238,7 @@ static u32 fmt_to_bpp(u32 pixelformat)
 			break;
 		/*non-interleaved 420*/
 		case IPU_PIX_FMT_YUV420P:
+		case IPU_PIX_FMT_YVU420P:
 		case IPU_PIX_FMT_YUV420P2:
 		case IPU_PIX_FMT_NV12:
 			bpp = 12;
@@ -266,6 +268,7 @@ static cs_t colorspaceofpixel(int fmt)
 		case IPU_PIX_FMT_YUYV:
 		case IPU_PIX_FMT_YUV420P2:
 		case IPU_PIX_FMT_YUV420P:
+		case IPU_PIX_FMT_YVU420P:
 		case IPU_PIX_FMT_YVU422P:
 		case IPU_PIX_FMT_YUV422P:
 		case IPU_PIX_FMT_YUV444:
@@ -435,6 +438,12 @@ static void _ipu_update_offset(unsigned int fmt, unsigned int width, unsigned in
 			*uoff = (width * (height - pos_y) - pos_x)
 				+ ((width/2 * pos_y/2) + pos_x/2);
 			*voff = *uoff + (width/2 * height/2);
+			break;
+		case IPU_PIX_FMT_YVU420P:
+			*off = pos_y * width + pos_x;
+			*voff = (width * (height - pos_y) - pos_x)
+				+ ((width/2 * pos_y/2) + pos_x/2);
+			*uoff = *voff + (width/2 * height/2);
 			break;
 		case IPU_PIX_FMT_YVU422P:
 			*off = pos_y * width + pos_x;
@@ -1018,7 +1027,8 @@ static void __fill_fb_black(unsigned int fmt,
 					i++, tmp++)
 				*tmp = color;
 		} else if ((fmt == IPU_PIX_FMT_YUV420P) ||
-				(fmt == IPU_PIX_FMT_NV12)) {
+				(fmt == IPU_PIX_FMT_NV12) ||
+				(fmt == IPU_PIX_FMT_YVU420P)) {
 			char * base = (char *)fb_mem;
 			int j, screen_size = fb_var->xres * fb_var->yres;
 
@@ -1243,15 +1253,13 @@ again:
 
 		if ( ioctl(ipu_priv_handle->output.fd_fb, FBIOGET_FSCREENINFO, &fb_fix) < 0) {
 			dbg(DBG_ERR, "Get FB fix info failed!\n");
-			close(ipu_priv_handle->output.fd_fb);
 			ret = -1;
-			goto err;
+			goto err1;
 		}
 		if ( ioctl(ipu_priv_handle->output.fd_fb, FBIOGET_VSCREENINFO, &fb_var) < 0) {
 			dbg(DBG_ERR, "Get FB var info failed!\n");
-			close(ipu_priv_handle->output.fd_fb);
 			ret = -1;
-			goto err;
+			goto err1;
 		}
 
 		if (ioctl(ipu_priv_handle->output.fd_fb, MXCFB_GET_FB_IPU_CHAN,
@@ -1295,23 +1303,20 @@ again:
 
 			if ( ioctl(ipu_priv_handle->output.fd_fb, FBIOPUT_VSCREENINFO, &fb_var) < 0) {
 				dbg(DBG_ERR, "Set FB var info failed!\n");
-				close(ipu_priv_handle->output.fd_fb);
 				ret = -1;
-				goto err;
+				goto err1;
 			}
 
 			if ( ioctl(ipu_priv_handle->output.fd_fb, FBIOGET_FSCREENINFO, &fb_fix) < 0) {
 				dbg(DBG_ERR, "Get FB fix info failed!\n");
-				close(ipu_priv_handle->output.fd_fb);
 				ret = -1;
-				goto err;
+				goto err1;
 			}
 
 			if ( ioctl(ipu_priv_handle->output.fd_fb, FBIOGET_VSCREENINFO, &fb_var) < 0) {
 				dbg(DBG_ERR, "Get FB var info failed!\n");
-				close(ipu_priv_handle->output.fd_fb);
 				ret = -1;
-				goto err;
+				goto err1;
 			}
 		}
 
@@ -1323,9 +1328,8 @@ again:
 		if ((owidth > fb_var.xres) || (oheight > fb_var.yres)
 				|| (fmt_to_bpp(output->fmt) != fb_var.bits_per_pixel)) {
 			dbg(DBG_ERR, "Output image is not fit for %s!\n", fbdev);
-			close(ipu_priv_handle->output.fd_fb);
 			ret = -1;
-			goto err;
+			goto err1;
 		}
 
 		ipu_priv_handle->output.fb_stride = fb_var.xres * bytes_per_pixel(output->fmt);
@@ -1348,9 +1352,8 @@ again:
 				ipu_priv_handle->output.fd_fb, 0);
 		if (ipu_priv_handle->output.fb_mem == MAP_FAILED) {
 			dbg(DBG_ERR, "mmap failed!\n");
-			close(ipu_priv_handle->output.fd_fb);
 			ret = -1;
-			goto err;
+			goto err1;
 		}
 
 		if (ipu_priv_handle->output.fb_chan == MEM_FG_SYNC)
@@ -1388,6 +1391,11 @@ again:
 		}
 
 	}
+	return ret;
+
+err1:
+	close(ipu_priv_handle->output.fd_fb);
+	ipu_priv_handle->output.fd_fb = -1;
 err:
 	return ret;
 }
@@ -1458,7 +1466,7 @@ again:
 		}
 	}
 
-	if (ipu_priv_handle->output.show_to_fb){
+	if (ipu_priv_handle->output.show_to_fb && (ipu_priv_handle->output.fd_fb > 0)){
 		struct fb_var_screeninfo fb_var;
 
 		ioctl(ipu_priv_handle->output.fd_fb, FBIOGET_VSCREENINFO, &fb_var);
@@ -2709,7 +2717,7 @@ static void _mxc_ipu_lib_task_uninit(ipu_lib_priv_handle_t * ipu_priv_handle, pi
 			ipu_priv_handle->output_fr_cnt++;
 	}
 
-	if (ipu_priv_handle->output.show_to_fb) {
+	if (ipu_priv_handle->output.show_to_fb && (ipu_priv_handle->output.fd_fb > 0)) {
 		if (ipu_priv_handle->output.fb_chan == MEM_FG_SYNC) {
 			struct fb_fix_screeninfo fb_fix;
 			struct fb_var_screeninfo fb_var;
@@ -3354,6 +3362,7 @@ int mxc_ipu_lib_task_buf_update(ipu_lib_handle_t * ipu_handle,
 		return ipu_priv_handle->update_bufnum;
 }
 
+extern int ipu_update_dp_csc(int **param);
 /*!
  * This function control the ipu task according to param setting.
  *
@@ -3454,6 +3463,16 @@ int mxc_ipu_lib_task_control(int ctl_cmd, void * arg, ipu_lib_handle_t * ipu_han
 			_mxc_ipu_lib_task_uninit(ipu_priv_handle,
 						g_ipu_shm->task[ctl_task->index].task_pid);
 		}
+		break;
+	}
+	case IPU_CTL_UPDATE_DP_CSC:
+	{
+		ipu_lib_ctl_csc_t * csc =
+				(ipu_lib_ctl_csc_t *) arg;
+		if ((ret = ipu_open()) < 0)
+			break;
+		ret = ipu_update_dp_csc((int **)csc->param);
+		ipu_close();
 		break;
 	}
 	default:
