@@ -7,14 +7,21 @@ Build-Depends: debhelper (>= 7)
 Standards-Version: 3.9.1
 
 Package: imx-lib
-Architecture: armel
+Architecture: armel armhf
 Depends: imx-firmware,${shlibs:Depends},${misc:Depends}
 Provides: imx-lib
 Description: Libraries for ipu, vpu and sahara2
  Libraries for the ipu, vpu and sahara2 units on the iMX5
 
 Package: imx-lib-dev
-Architecture: armel
+Architecture: armel armhf
 Depends: imx-lib
 Description: Headers for ipu, vpu and sahara2
  Headers for the ipu, vpu, and sahara2 units on the iMX5
+
+Package: imx-lib-dbg
+Architecture: armel armhf
+Depends: imx-lib
+Description: Debug libraries for ipu, vpu and sahara2
+ Debug versions of the libraries for the ipu, vpu, and sahara2 units
+ on the iMX5
