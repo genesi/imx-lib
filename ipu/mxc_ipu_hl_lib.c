@@ -2424,7 +2424,7 @@ static void * _get_shm(char *name, int size, int *first)
 	return buf;
 }
 
-static int _ipu_ipc_prepare(void)
+int mxc_ipu_lib_ipc_init(void)
 {
 	int ret = 0;
 	int first = 0;
@@ -2631,7 +2631,7 @@ int mxc_ipu_lib_task_init(ipu_lib_input_param_t * input,
 	}
 
 	if (!g_ipu_shm) {
-		if (_ipu_ipc_prepare() < 0) {
+		if (mxc_ipu_lib_ipc_init() < 0) {
 			ret = -1;
 			goto err0;
 		}
@@ -3414,7 +3414,7 @@ int mxc_ipu_lib_task_control(int ctl_cmd, void * arg, ipu_lib_handle_t * ipu_han
 		ipu_lib_ctl_task_t * ctl_task =
 				(ipu_lib_ctl_task_t *) arg;
 		if (!g_ipu_shm) {
-			if (_ipu_ipc_prepare() < 0) {
+			if (mxc_ipu_lib_ipc_init() < 0) {
 				ret = -1;
 				goto done;
 			}
@@ -3433,7 +3433,7 @@ int mxc_ipu_lib_task_control(int ctl_cmd, void * arg, ipu_lib_handle_t * ipu_han
 		ipu_lib_priv_handle_t * ipu_priv_handle;
 
 		if (!g_ipu_shm) {
-			if (_ipu_ipc_prepare() < 0) {
+			if (mxc_ipu_lib_ipc_init() < 0) {
 				ret = -1;
 				goto done;
 			}

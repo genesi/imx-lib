@@ -411,6 +411,13 @@ int mxc_ipu_lib_task_buf_update(ipu_lib_handle_t * ipu_handle,
  */
 int mxc_ipu_lib_task_control(int ctl_cmd, void * arg, ipu_lib_handle_t * ipu_handle);
 
+/*!
+ * This function initialize the ipu IPC share memory.
+ *
+ * @return 0 as successful, -1 failed
+ */
+int mxc_ipu_lib_ipc_init(void);
+
 #ifdef __cplusplus
 }
 #endif
