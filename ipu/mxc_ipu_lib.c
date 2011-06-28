@@ -63,6 +63,7 @@ int32_t ipu_init_channel_buffer(ipu_channel_t channel, ipu_buffer_t type,
 		uint32_t stride,
 		ipu_rotate_mode_t rot_mode,
 		dma_addr_t phyaddr_0, dma_addr_t phyaddr_1,
+		dma_addr_t phyaddr_2,
 		uint32_t u_offset, uint32_t v_offset)
 {
 	ipu_channel_buf_parm buf_parm;
@@ -75,6 +76,7 @@ int32_t ipu_init_channel_buffer(ipu_channel_t channel, ipu_buffer_t type,
 	buf_parm.rot_mode = rot_mode;
 	buf_parm.phyaddr_0 = phyaddr_0;
 	buf_parm.phyaddr_1 = phyaddr_1;
+	buf_parm.phyaddr_2 = phyaddr_2;
 	buf_parm.u_offset = u_offset;
 	buf_parm.v_offset = v_offset;
 	return ioctl(fd_ipu, IPU_INIT_CHANNEL_BUFFER, &buf_parm);

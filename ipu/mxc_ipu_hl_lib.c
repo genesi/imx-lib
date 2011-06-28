@@ -1342,8 +1342,8 @@ again:
 
 		ipu_priv_handle->output.o_minfo[0].paddr = fb_fix.smem_start +
 			ipu_priv_handle->output.screen_size + offset;
-		ipu_priv_handle->output.o_minfo[1].paddr = fb_fix.smem_start + offset;
-		ipu_priv_handle->output.o_minfo[2].paddr = fb_fix.smem_start
+		ipu_priv_handle->output.o_minfo[2].paddr = fb_fix.smem_start + offset;
+		ipu_priv_handle->output.o_minfo[1].paddr = fb_fix.smem_start
 			+ 2*ipu_priv_handle->output.screen_size + offset;
 
 		ipu_priv_handle->output.fb_mem = mmap(0,
@@ -1726,6 +1726,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 				IPU_ROTATE_NONE,
 				buf0,
 				buf1,
+				0,
 				ipu_priv_handle->i_uoff, ipu_priv_handle->i_voff);
 		if (ret < 0) {
 			ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -1743,6 +1744,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 					IPU_ROTATE_NONE,
 					buf0_p,
 					buf1_p,
+					0,
 					ipu_priv_handle->i_uoff, ipu_priv_handle->i_voff);
 			if (ret < 0) {
 				ipu_uninit_channel(ipu_priv_handle->output.vdi_ic_p_chan);
@@ -1758,6 +1760,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 					IPU_ROTATE_NONE,
 					buf0_n,
 					buf1_n,
+					0,
 					ipu_priv_handle->i_uoff, ipu_priv_handle->i_voff);
 			if (ret < 0) {
 				ipu_uninit_channel(ipu_priv_handle->output.vdi_ic_n_chan);
@@ -1776,6 +1779,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 					ipu_priv_handle->ov_minfo[0].paddr + ipu_priv_handle->ov_off,
 					ipu_priv_handle->mode & OP_STREAM_MODE ?
 					ipu_priv_handle->ov_minfo[1].paddr + ipu_priv_handle->ov_off : 0,
+					0,
 					ipu_priv_handle->ov_uoff, ipu_priv_handle->ov_voff);
 			if (ret < 0) {
 				ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -1793,6 +1797,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 						ipu_priv_handle->ov_alpha_minfo[0].paddr + ipu_priv_handle->ov_alpha_off,
 						ipu_priv_handle->mode & OP_STREAM_MODE ?
 						ipu_priv_handle->ov_alpha_minfo[1].paddr + ipu_priv_handle->ov_alpha_off : 0,
+						0,
 						0, 0);
 				if (ret < 0) {
 					ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -1822,6 +1827,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 				output->rot,
 				buf0,
 				buf1,
+				0,
 				ipu_priv_handle->output.o_uoff, ipu_priv_handle->output.o_voff);
 		if (ret < 0) {
 			ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -1874,6 +1880,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 				ipu_priv_handle->i_minfo[0].paddr + ipu_priv_handle->i_off,
 				ipu_priv_handle->mode & OP_STREAM_MODE ?
 				ipu_priv_handle->i_minfo[1].paddr + ipu_priv_handle->i_off : 0,
+				0,
 				ipu_priv_handle->i_uoff, ipu_priv_handle->i_voff);
 		if (ret < 0) {
 			ipu_uninit_channel(ipu_priv_handle->output.rot_chan);
@@ -1897,6 +1904,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 				ipu_priv_handle->mode & OP_STREAM_MODE ?
 				ipu_priv_handle->output.o_minfo[1].paddr +
 				ipu_priv_handle->output.o_off : 0,
+				0,
 				ipu_priv_handle->output.o_uoff, ipu_priv_handle->output.o_voff);
 		if (ret < 0) {
 			ipu_uninit_channel(ipu_priv_handle->output.rot_chan);
@@ -2011,6 +2019,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 				IPU_ROTATE_NONE,
 				buf0,
 				buf1,
+				0,
 				ipu_priv_handle->i_uoff, ipu_priv_handle->i_voff);
 		if (ret < 0) {
 			ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -2028,6 +2037,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 					IPU_ROTATE_NONE,
 					buf0_p,
 					buf1_p,
+					0,
 					ipu_priv_handle->i_uoff, ipu_priv_handle->i_voff);
 			if (ret < 0) {
 				ipu_uninit_channel(ipu_priv_handle->output.vdi_ic_p_chan);
@@ -2043,6 +2053,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 					IPU_ROTATE_NONE,
 					buf0_n,
 					buf1_n,
+					0,
 					ipu_priv_handle->i_uoff, ipu_priv_handle->i_voff);
 			if (ret < 0) {
 				ipu_uninit_channel(ipu_priv_handle->output.vdi_ic_n_chan);
@@ -2061,6 +2072,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 					ipu_priv_handle->ov_minfo[0].paddr + ipu_priv_handle->ov_off,
 					ipu_priv_handle->mode & OP_STREAM_MODE ?
 					ipu_priv_handle->ov_minfo[1].paddr + ipu_priv_handle->ov_off : 0,
+					0,
 					ipu_priv_handle->ov_uoff, ipu_priv_handle->ov_voff);
 			if (ret < 0) {
 				ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -2078,6 +2090,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 						ipu_priv_handle->ov_alpha_minfo[0].paddr + ipu_priv_handle->ov_alpha_off,
 						ipu_priv_handle->mode & OP_STREAM_MODE ?
 						ipu_priv_handle->ov_alpha_minfo[1].paddr + ipu_priv_handle->ov_alpha_off : 0,
+						0,
 						0, 0);
 				if (ret < 0) {
 					ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -2096,6 +2109,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 				ipu_priv_handle->output.r_minfo[0].paddr,
 				ipu_priv_handle->mode & OP_STREAM_MODE ?
 				ipu_priv_handle->output.r_minfo[1].paddr : 0,
+				0,
 				0, 0);
 		if (ret < 0) {
 			ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -2118,6 +2132,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 				ipu_priv_handle->output.r_minfo[0].paddr,
 				ipu_priv_handle->mode & OP_STREAM_MODE ?
 				ipu_priv_handle->output.r_minfo[1].paddr : 0,
+				0,
 				0, 0);
 		if (ret < 0) {
 			ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -2142,6 +2157,7 @@ static int _ipu_channel_setup(ipu_lib_input_param_t * input,
 				ipu_priv_handle->mode & OP_STREAM_MODE ?
 				ipu_priv_handle->output.o_minfo[1].paddr +
 				ipu_priv_handle->output.o_off : 0,
+				0,
 				ipu_priv_handle->output.o_uoff, ipu_priv_handle->output.o_voff);
 		if (ret < 0) {
 			ipu_uninit_channel(ipu_priv_handle->output.ic_chan);
@@ -2939,9 +2955,9 @@ static int pan_display(ipu_lib_priv_handle_t * ipu_priv_handle, int idx)
 	if (idx == 0)
 		fb_var.yoffset = fb_var.yres;
 	else if (idx == 1)
-		fb_var.yoffset = 0;
-	else
 		fb_var.yoffset = 2*fb_var.yres;
+	else
+		fb_var.yoffset = 0;
 
 	if (ioctl(ipu_priv_handle->output.fd_fb, FBIOPAN_DISPLAY, &fb_var) < 0) {
 		dbg(DBG_WARNING, "Set FB pan display failed!\n");
