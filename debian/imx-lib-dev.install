@@ -2,3 +2,4 @@ ipu/mxc_ipu_hl_lib.h			/usr/include
 screenlayer/ScreenLayer.h		/usr/include
 vpu/vpu_lib.h				/usr/include
 vpu/vpu_io.h				/usr/include
+pkgconfig/*				/usr/lib/pkgconfig

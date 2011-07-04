@@ -1,0 +1,14 @@
+prefix=/usr
+
+includedir=${prefix}/include
+libdir=${prefix}/lib
+
+
+Name: Freescale VPU Library
+Description: Freescale VPU Library
+Requires:  
+Version: 5.1.4
+Libs: -L${libdir} -lvpu
+Cflags: -I${includedir} 
+
+libraries=

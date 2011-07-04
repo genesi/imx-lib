@@ -1,0 +1,14 @@
+prefix=/usr
+
+includedir=${prefix}/include
+libdir=${prefix}/lib
+
+
+Name: Freescale IPU Library
+Description: Freescale IPU Library
+Requires:  
+Version: 11.5.1
+Libs: -L${libdir} -lipu
+Cflags: -I${includedir} 
+
+libraries=
