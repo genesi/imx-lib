@@ -18,7 +18,7 @@ export DH_OPTIONS
 # Let's see if this works...
 export PLATFORM=IMX51
 # fakeroot make-kpkg --arch armel --subarch efikamx --initrd --jobs 4 --us --uc --cross-compile arm-linux-gnueabi- --revision 10.08.00 kernel_headers
-export INCLUDE=-I/usr/src/linux-headers-2.6.31.14.21-efikamx/include/
+export INCLUDE=-I/usr/src/linux/include/
 export LIB_VERSION_MAJOR=1
 export LIB_VERSION_MINOR=1
 
