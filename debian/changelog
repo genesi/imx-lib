@@ -1,3 +1,15 @@
+imx-lib (2.0.0-20110714) maverick; urgency=low
+
+  * Bump for release
+
+ -- Matt Sealey <matt@genesi-usa.com>  Thu, 14 Jul 2011 17:23:27 -0600
+
+imx-lib (1.1.2-20110628) maverick; urgency=low
+
+  * Update to latest BSP
+
+ -- Matt Sealey <matt@genesi-usa.com>  Tue, 28 Jun 2011 17:33:45 -0600
+
 imx-lib (1.1.1-20110406) maverick; urgency=low
 
   * Update to latest BSP
