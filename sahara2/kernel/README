@@ -1,0 +1,3 @@
+Got these headers from /usr/src/linux/drivers/mxc/security/include - please keep them up to date with the
+kernel. For some reason the stupid build script doesn't seem to want to look in the linux source directory
+(and they're not there in a headers package either)

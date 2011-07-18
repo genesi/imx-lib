@@ -6,9 +6,61 @@ Uploaders: Steev Klimaszewski <steev@genesi-usa.com>, Konstantinos Margaritis <m
 Build-Depends: debhelper (>= 7)
 Standards-Version: 3.9.1
 
-Package: imx-lib
+Package: libvpu
 Architecture: armel armhf
 Depends: imx-firmware,${shlibs:Depends},${misc:Depends}
+Provides: libvpu
+Description: VPU kernel access library for i.MX5 processors
+
+Package: libvpu-dev
+Architecture: armel armhf
+Depends: libvpu
+Provides: libvpu-dev
+Description: VPU kernel access library for i.MX5 processors
+ Headers for libvpu
+
+Package: libipu
+Architecture: armel armhf
+Depends: ${shlibs:Depends},${misc:Depends}
+Provides: libipu
+Description: IPU kernel access library for i.MX5 processors
+
+Package: libipu-dev
+Architecture: armel armhf
+Depends: libipu
+Provides: libipu-dev
+Description: IPU kernel access library for i.MX5 processors
+ Headers for libipu
+
+Package: libipuscreenlayer
+Architecture: armel armhf
+Depends: ${shlibs:Depends},${misc:Depends}
+Provides: libipuscreenlayer
+Description: IPU Screen Layer access library for i.MX5 processors
+
+Package: libipuscreenlayer-dev
+Architecture: armel armhf
+Depends: libipuscreenlayer
+Provides: libIpuScreenLayer-dev
+Description: IPU Screen Layer access library for i.MX5 processors
+ Headers for libIpuScreenLayer
+
+Package: libsahara
+Architecture: armel armhf
+Depends: ${shlibs:Depends},${misc:Depends}
+Provides: libsahara
+Description: SAHARA2 Hardware Security Engine library for i.MX5 processors
+
+Package: libsahara-dev
+Architecture: armel armhf
+Depends: libsahara
+Provides: libsahara-dev
+Description: SAHARA2 Hardware Security Engine library for i.MX5 processors
+ Headers for libIpuScreenLayer
+
+Package: imx-lib
+Architecture: armel armhf
+Depends: libipu,libvpu,libIpuScreenLayer,libsahara2,${shlibs:Depends},${misc:Depends}
 Provides: imx-lib
 Description: Libraries for ipu, vpu and sahara2
  Libraries for the ipu, vpu and sahara2 units on the iMX5
@@ -19,9 +71,10 @@ Depends: imx-lib
 Description: Headers for ipu, vpu and sahara2
  Headers for the ipu, vpu, and sahara2 units on the iMX5
 
-Package: imx-lib-dbg
-Architecture: armel armhf
-Depends: imx-lib
-Description: Debug libraries for ipu, vpu and sahara2
- Debug versions of the libraries for the ipu, vpu, and sahara2 units
- on the iMX5
+#Package: imx-lib
+#Architecture: armel armhf
+#Depends: imx-lib
+#Description: Debug libraries for ipu, vpu and sahara2
+# Debug versions of the libraries for the ipu, vpu, and sahara2 units
+# on the iMX5
+

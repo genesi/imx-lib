@@ -25,7 +25,7 @@ all install:
 endif
 
 $(LIB_SONAME_FULL): $(OBJS)
-	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^ -L../ipu -lipu
+	$(CC) -shared -nostartfiles -Wl,-soname,$@ -o $@ $^ -I/usr/src/linux/include/ -L../ipu -lipu
 	ln -s $(LIB_SONAME_FULL) $(LIB_SONAME).$(LIB_VERSION_MAJOR)
 	ln -s $(LIB_SONAME_FULL) $(LIB_SONAME)
 
