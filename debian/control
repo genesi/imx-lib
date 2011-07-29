@@ -41,7 +41,7 @@ Description: IPU Screen Layer access library for i.MX5 processors
 Package: libipuscreenlayer-dev
 Architecture: armel armhf
 Depends: libipuscreenlayer
-Provides: libIpuScreenLayer-dev
+Provides: libipuscreenlayer-dev
 Description: IPU Screen Layer access library for i.MX5 processors
  Headers for libIpuScreenLayer
 
@@ -60,21 +60,10 @@ Description: SAHARA2 Hardware Security Engine library for i.MX5 processors
 
 Package: imx-lib
 Architecture: armel armhf
-Depends: libipu,libvpu,libipuscreenlayer,libsahara,${shlibs:Depends},${misc:Depends}
 Provides: imx-lib
-Description: Libraries for ipu, vpu and sahara2
- Libraries for the ipu, vpu and sahara2 units on the iMX5
+Description: Dummy package (legacy)
 
 Package: imx-lib-dev
 Architecture: armel armhf
 Depends: imx-lib
-Description: Headers for ipu, vpu and sahara2
- Headers for the ipu, vpu, and sahara2 units on the iMX5
-
-#Package: imx-lib
-#Architecture: armel armhf
-#Depends: imx-lib
-#Description: Debug libraries for ipu, vpu and sahara2
-# Debug versions of the libraries for the ipu, vpu, and sahara2 units
-# on the iMX5
-
+Description: Dummy package (legacy)
