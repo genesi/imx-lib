@@ -980,11 +980,11 @@ done:
 static int fit_fb_setting(struct fb_var_screeninfo * var, int width,
 	int height, int fmt, ipu_channel_t fb_chan, int bufs)
 {
-	if (var->yoffset != 0)
-		return 0;
 	if (fb_chan == MEM_BG_SYNC)
 		return ((var->xres_virtual == var->xres) &&
-			(var->yres_virtual == bufs*var->yres));
+			(var->xres == (unsigned int)width) &&
+			(var->yres == (unsigned int)height) &&
+			(var->yres_virtual >= bufs*var->yres));
 
 	if ((colorspaceofpixel(fmt) == YUV_CS) &&
 			(var->nonstd != (unsigned int)fmt))
@@ -995,14 +995,15 @@ static int fit_fb_setting(struct fb_var_screeninfo * var, int width,
 		return 0;
 	if (fb_chan == MEM_DC_SYNC)
 		return ((var->xres_virtual == var->xres) &&
-			(var->yres_virtual == bufs*var->yres));
-	if (fb_chan == MEM_FG_SYNC) {
+			(var->xres == (unsigned int)width) &&
+			(var->yres == (unsigned int)height) &&
+			(var->yres_virtual >= bufs*var->yres));
+	if (fb_chan == MEM_FG_SYNC)
 		return ((var->xres == (unsigned int)width) &&
 			(var->xres_virtual == (unsigned int)width) &&
 			(var->yres == (unsigned int)height) &&
-			(var->yres_virtual == (unsigned int)(bufs*height)) &&
+			(var->yres_virtual >= (unsigned int)(bufs*height)) &&
 			(var->bits_per_pixel == fmt_to_bpp(fmt)));
-	}
 
 	return 1;
 }
