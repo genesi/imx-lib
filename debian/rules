@@ -22,16 +22,25 @@ export LIB_VERSION_MINOR=0
 
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
-autogen-files = debian/libipu-dev.install	debian/libipuscreenlayer.install	debian/libvpu-dev.install \
-		debian/libipu.install		debian/libsahara-dev.install		debian/libvpu.install \
-		debian/libipuscreenlayer-dev.install					debian/libsahara.install \
+autogen-files = debian/libipu-dev.install	debian/libipu.install		debian/libvpu.install \
+		debian/libvpu-dev.install 	debian/libsahara.install \
+		debian/libipuscreenlayer-dev.install 				debian/libipuscreenlayer.install \
+		debian/libipu-dev.links		debian/libipuscreenlayer-dev.links \
+		debian/libsahara.links		debian/libvpu-dev.links \
 		pkgconfig/ipu-core-imx.pc	pkgconfig/vpu-core-imx.pc
 
 debian/%: debian/%.in
-        sed -e 's/$${DEB_HOST_MULTIARCH}/$(DEB_HOST_MULTIARCH)/g' $< > $@
+	sed -e 's/$${DEB_HOST_MULTIARCH}/$(DEB_HOST_MULTIARCH)/g' $< > $@
 
 pkgconfig/%: pkgconfig/%.in
-        sed -e 's/$${DEB_HOST_MULTIARCH}/$(DEB_HOST_MULTIARCH)/g' $< > $@
+	sed -e 's/$${DEB_HOST_MULTIARCH}/$(DEB_HOST_MULTIARCH)/g' $< > $@
 
+clean: 
+	rm -f $(autogen-files)
+	dh clean
+
+override_dh_install: $(autogen-files)
+	dh_install -a
+	
 %:
 	dh $@ 
