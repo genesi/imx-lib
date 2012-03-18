@@ -1,1 +1,1 @@
-sahara2/libsahara.so*		/usr/lib/${DEB_HOST_MULTIARCH}
+sahara2/libsahara.so.*.*		/usr/lib/${DEB_HOST_MULTIARCH}
