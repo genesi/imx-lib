@@ -1,0 +1,5 @@
+vpu/libvpu.so.*			/usr/lib/${DEB_HOST_MULTIARCH}
+vpu/libvpu.so			/usr/lib/${DEB_HOST_MULTIARCH}
+vpu/vpu_lib.h			/usr/include
+vpu/vpu_io.h			/usr/include
+pkgconfig/vpu-core-imx.pc	/usr/lib/pkgconfig

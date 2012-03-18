@@ -1,3 +1,10 @@
+imx-lib (2.0.0-201203.1) unstable; urgency=low
+
+  * Migrate to multiarch, remove imx-lib dummy packages
+  * Removed libsahara-dev package, nothing to install (no public headers).
+
+ -- Konstantinos Margaritis <markos@genesi-usa.com>  Sun, 18 Mar 2012 19:28:41 +0000
+
 imx-lib (2.0.0-20110714) maverick; urgency=low
 
   * Bump for release
