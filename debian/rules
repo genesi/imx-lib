@@ -20,5 +20,18 @@ export INCLUDE=-I/usr/src/linux/include/
 export LIB_VERSION_MAJOR=2
 export LIB_VERSION_MINOR=0
 
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+autogen-files = debian/libipu-dev.install	debian/libipuscreenlayer.install	debian/libvpu-dev.install \
+		debian/libipu.install		debian/libsahara-dev.install		debian/libvpu.install \
+		debian/libipuscreenlayer-dev.install					debian/libsahara.install \
+		pkgconfig/ipu-core-imx.pc	pkgconfig/vpu-core-imx.pc
+
+debian/%: debian/%.in
+        sed -e 's/$${DEB_HOST_MULTIARCH}/$(DEB_HOST_MULTIARCH)/g' $< > $@
+
+pkgconfig/%: pkgconfig/%.in
+        sed -e 's/$${DEB_HOST_MULTIARCH}/$(DEB_HOST_MULTIARCH)/g' $< > $@
+
 %:
 	dh $@ 

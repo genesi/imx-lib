@@ -1,5 +1,5 @@
 Source: imx-lib
-Section: unknown
+Section: libs
 Priority: extra
 Maintainer: Matt Sealey <matt@genesi-usa.com>
 Uploaders: Steev Klimaszewski <steev@genesi-usa.com>, Konstantinos Margaritis <markos@genesi-usa.com>, Luca Barbato <lu_zero@genesi-usa.com>
@@ -8,12 +8,15 @@ Standards-Version: 3.9.1
 
 Package: libvpu
 Architecture: armel armhf
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
 Depends: imx-firmware,${shlibs:Depends},${misc:Depends}
 Provides: libvpu
 Description: VPU kernel access library for i.MX5 processors
 
 Package: libvpu-dev
 Architecture: armel armhf
+Multi-Arch: foreign
 Depends: libvpu
 Provides: libvpu-dev
 Description: VPU kernel access library for i.MX5 processors
@@ -21,12 +24,15 @@ Description: VPU kernel access library for i.MX5 processors
 
 Package: libipu
 Architecture: armel armhf
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
 Depends: ${shlibs:Depends},${misc:Depends}
 Provides: libipu
 Description: IPU kernel access library for i.MX5 processors
 
 Package: libipu-dev
 Architecture: armel armhf
+Multi-Arch: foreign
 Depends: libipu
 Provides: libipu-dev
 Description: IPU kernel access library for i.MX5 processors
@@ -34,12 +40,15 @@ Description: IPU kernel access library for i.MX5 processors
 
 Package: libipuscreenlayer
 Architecture: armel armhf
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
 Depends: ${shlibs:Depends},${misc:Depends}
 Provides: libipuscreenlayer
 Description: IPU Screen Layer access library for i.MX5 processors
 
 Package: libipuscreenlayer-dev
 Architecture: armel armhf
+Multi-Arch: foreign
 Depends: libipuscreenlayer
 Provides: libipuscreenlayer-dev
 Description: IPU Screen Layer access library for i.MX5 processors
@@ -47,23 +56,9 @@ Description: IPU Screen Layer access library for i.MX5 processors
 
 Package: libsahara
 Architecture: armel armhf
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
 Depends: ${shlibs:Depends},${misc:Depends}
 Provides: libsahara
 Description: SAHARA2 Hardware Security Engine library for i.MX5 processors
 
-Package: libsahara-dev
-Architecture: armel armhf
-Depends: libsahara
-Provides: libsahara-dev
-Description: SAHARA2 Hardware Security Engine library for i.MX5 processors
- Headers for libIpuScreenLayer
-
-Package: imx-lib
-Architecture: armel armhf
-Provides: imx-lib
-Description: Dummy package (legacy)
-
-Package: imx-lib-dev
-Architecture: armel armhf
-Depends: imx-lib
-Description: Dummy package (legacy)
