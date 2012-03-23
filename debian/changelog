@@ -1,4 +1,4 @@
-imx-lib (2.0.0-201203.1) unstable; urgency=low
+imx-lib (2.0.0-201203) unstable; urgency=low
 
   * Migrate to multiarch, remove imx-lib dummy packages
   * Removed libsahara-dev package, nothing to install (no public headers).
