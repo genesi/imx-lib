@@ -26,7 +26,7 @@ extern "C"{
 #include <semaphore.h>
 #include <linux/ipu.h>
 #include <linux/mxcfb.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>

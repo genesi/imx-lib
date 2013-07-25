@@ -41,7 +41,7 @@ extern "C"{
 #include <sys/mman.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include "mxc_ipu_hl_lib.h"
 
 #define DBG_DEBUG		3
